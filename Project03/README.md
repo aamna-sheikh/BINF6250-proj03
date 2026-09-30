@@ -4,8 +4,16 @@ Description of the project
 # Pseudocode
 Put pseudocode in this box:
 
-```
-Some pseudocode here
+```steps to be taken in writing the fuction
+1.Randomly choose a motif from each sequence.
+2.Temporarily remove one motif.
+3.Use the remaining motifs to construct a PFM.
+4.Convert/use that PFM to obtain a PWM.
+5. Use the PWM to score possible 10-mers in the removed sequence.
+6.Use those scores to probabilistically choose a new motif.
+7.Repeat.
+8.At the end, create your final PFM.
+
 ```
 
 # Successes
