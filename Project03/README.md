@@ -2,8 +2,6 @@
 Description of the project
 
 # Pseudocode
-Put pseudocode in this box:
-
 def GibbsMotifFinder (seqs, k, seed=None):
     '''
     Function to find a pfm from a list of strings using a Gibbs sampler
@@ -25,6 +23,23 @@ def GibbsMotifFinder (seqs, k, seed=None):
 
 steps to be taken in writing the fuction
 1.Randomly choose a motif from each sequence.
+#make a list for all the motifs
+motif = []
+seq_length = length of the current sequence
+k  = length of the motif
+#now going to choose a starting position
+for seq in seqs:
+    seq_length = len(seq)
+start_position = rng.integers(0, seq_length - k + 1)
+# Extract the k-length motif
+  motif = seq[start:start + k]
+
+    # Store the motif
+    motifs.append(motif)
+
+return motifs
+
+
 2.Temporarily remove one motif.
 3.Use the remaining motifs to construct a PFM.
 4.Convert/use that PFM to obtain a PWM.
