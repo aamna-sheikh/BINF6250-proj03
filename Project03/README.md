@@ -37,7 +37,9 @@ start_position = rng.integers(0, seq_length - k + 1)
     # Store the motif
     motifs.append(motif)
 
-return motifs
+return motifs# (was for practice only)
+
+for iteration in range(1000):
 
 
 2.Temporarily remove one motif.
