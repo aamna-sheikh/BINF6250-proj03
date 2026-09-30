@@ -4,7 +4,7 @@ Description of the project
 # Pseudocode
 Put pseudocode in this box:
 
-```steps to be taken in writing the fuction
+steps to be taken in writing the fuction
 1.Randomly choose a motif from each sequence.
 2.Temporarily remove one motif.
 3.Use the remaining motifs to construct a PFM.
