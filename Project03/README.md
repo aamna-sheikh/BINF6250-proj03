@@ -21,34 +21,104 @@ def GibbsMotifFinder (seqs, k, seed=None):
 
     pass
 
-steps to be taken in writing the fuction
-1.Randomly choose a motif from each sequence.
-#make a list for all the motifs
-motif = []
-seq_length = length of the current sequence
-k  = length of the motif
-#now going to choose a starting position
-for seq in seqs:
-    seq_length = len(seq)
-start_position = rng.integers(0, seq_length - k + 1)
-# Extract the k-length motif
-  motif = seq[start:start + k]
+```
+GibbsMotifFinder(seqs, k, seed)
 
-    # Store the motif
-    motifs.append(motif)
+START with the input sequences (seqs) and motif length k
 
-return motifs# (was for practice only)
+SET the random seed
 
-for iteration in range(1000):
+CREATE an empty list called motifs
+    # stores one motif for each sequence
 
 
-2.Temporarily remove one motif.
-3.Use the remaining motifs to construct a PFM.
-4.Convert/use that PFM to obtain a PWM.
-5. Use the PWM to score possible 10-mers in the removed sequence.
-6.Use those scores to probabilistically choose a new motif.
-7.Repeat.
-8.At the end, create your final PFM.
+INITIALIZE motifs:
+
+    LOOP through each sequence in seqs:
+
+        RANDOMLY select a valid k-mer position
+
+        RANDOMLY select a strand (+ or -)
+
+        IF the reverse strand is selected:
+            GET the reverse complement of the k-mer
+
+        ADD the selected k-mer to motifs
+
+
+START convergence loop:
+
+    REPEAT until motifs stop changing OR 10,000 iterations are reached:
+
+
+        RANDOMLY select one sequence index i
+
+        REMOVE motifs[i] temporarily from motifs
+
+
+        BUILD a PFM using all motifs except motifs[i]
+
+            USE build_pfm() from motif_ops.py
+
+
+        BUILD a PWM from the PFM
+
+            USE build_pwm() from motif_ops.py
+
+
+        CREATE an empty list called candidates
+
+            # stores possible k-mers, scores, and strand information
+
+
+        LOOP through every possible k-mer position in seqs[i]:
+
+
+            GET the forward k-mer
+
+            GET the reverse complement of the k-mer
+
+                USE reverse_complement() from seq_ops.py
+
+
+            SCORE the forward k-mer using the PWM
+
+                USE score_kmer() from motif_ops.py
+
+
+            SCORE the reverse complement using the PWM
+
+                USE score_kmer() from motif_ops.py
+
+
+            STORE the k-mer, score, position, and strand
+            in candidates
+
+
+        CONVERT the candidate scores into probabilities
+
+
+        RANDOMLY SAMPLE one candidate using the probabilities
+
+            # higher scoring candidates have a higher chance
+            # but do not select the maximum score directly
+
+
+        GET the sampled k-mer and strand information
+
+
+        UPDATE motifs[i] with the sampled motif
+
+
+        CHECK if motifs have converged
+
+
+BUILD the final PFM using all motifs
+
+    USE build_pfm() from motif_ops.py
+
+
+RETURN the final PFM
 
 ```
 
